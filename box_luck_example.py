@@ -38,12 +38,8 @@ def run_box_hits(num_box_hits: int):
         randint = np.random.randint(0, len(gun_list))
         curr_gun = gun_list[randint]
         count_dict[curr_gun] += 1
-    min_gun = min(count_dict, key=lambda k: count_dict[k])
-    max_gun = max(count_dict, key=lambda k: count_dict[k])
-    least_common = [min_gun, count_dict[min_gun]]
-    most_common = [max_gun, count_dict[max_gun]]
 
-    return least_common, most_common, count_dict
+    return count_dict
 
 
 def create_list_from_dict(count_dict: dict, sort: bool = True) -> list[dict]:
@@ -72,7 +68,15 @@ def create_plot(
     test = 0
     for step in np.arange(0, num_runs):
         num_box_hits += incr_box_hits
-        least_common, most_common, count_dict = run_box_hits(num_box_hits)
+        count_dict = run_box_hits(num_box_hits)
+        
+        min_gun = min(count_dict, key=lambda k: count_dict[k])
+        max_gun = max(count_dict, key=lambda k: count_dict[k])
+        least_common = [min_gun, count_dict[min_gun]]
+        most_common = [max_gun, count_dict[max_gun]]
+        
+        
+        
         target_gun_array.append(num_box_hits / count_dict[target_gun])
         least_common_array.append(num_box_hits / least_common[1])
         most_common_array.append(num_box_hits / most_common[1])

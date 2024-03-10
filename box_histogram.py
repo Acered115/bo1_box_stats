@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 from box_luck_example import run_box_hits
-from time import time
+import time
 
 
 
@@ -12,18 +12,24 @@ bin_size =1
 
 target_gun_array=[]
 i=0
-t0=time()
+t0=time.time()
 while i< num_runs:
     count_dict=run_box_hits(num_box_hits)
     target_gun_array.append(count_dict["tgun"])
     
     i+=1
-    print(i)
-    # if i % 1000==0:
-    #     t1=time()
-    #     multiple=num_runs/1000
-    #     minutes=multiple*(t1-t0)/60
-    #     print(minutes)
+
+    if i % 500==0:
+        t1=time.time()
+        # print(f"Currently at {i/num_runs}%")
+        remaining=num_runs-i
+        multiple=(remaining/500) *(t1-t0)
+        
+        time.localtime(time.time()+multiple)
+        formatted_time=time.strftime("%H:%M:%S",time.localtime(time.time()+multiple))
+        print(f"Current {i/num_runs*100}% completion The script will finish in {int(multiple)} seconds, or at approximately {formatted_time}")
+
+        t0=time.time()
     
 # Calculate the bin edges
 min_value = min(target_gun_array)

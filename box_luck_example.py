@@ -69,14 +69,12 @@ def create_plot(
     for step in np.arange(0, num_runs):
         num_box_hits += incr_box_hits
         count_dict = run_box_hits(num_box_hits)
-        
+
         min_gun = min(count_dict, key=lambda k: count_dict[k])
         max_gun = max(count_dict, key=lambda k: count_dict[k])
         least_common = [min_gun, count_dict[min_gun]]
         most_common = [max_gun, count_dict[max_gun]]
-        
-        
-        
+
         target_gun_array.append(num_box_hits / count_dict[target_gun])
         least_common_array.append(num_box_hits / least_common[1])
         most_common_array.append(num_box_hits / most_common[1])
@@ -97,9 +95,6 @@ def create_plot(
                 f"Game {step}, {target_gun} was most common,{test} times, with a trade avg of {num_box_hits/count_dict[target_gun]} out of {num_box_hits} box hits"
             )
 
-        # if num_box_hits / sorted_list[-1][1] < 16:
-        #     test += 1
-        #     print(test)
         print(step, "\r", end="")
 
     x_values = range(0, len(target_gun_array))

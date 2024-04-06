@@ -1,9 +1,18 @@
 # bo1_box_stats
 
 
+## Repo Contents
+### 1. binomial_dist.py<br>
+This file produces a binomial distribution plot using the Probability Density Function (PDF) of each success value (0->trails) using the the inputs of trials and the chance of success. <br> 
+Can take optinal arguments of "marked_success" which puts a dashed red line at the target success, "gun_name" which named the saved png accordingly and save_fig, which if set to True will create a plots folder in the directory that you run this named "plots" and saves the plot in there.
+
+
+## Installation Guide
 To run this file you need to have python3 installed, I wrote this in python 3.10 but I think it works on older versions.
 
-I suggest creating a venv and running this through it
+
+I suggest creating a venv **(Look up python venv for {your OS},
+ plenty of tutorials online)** and running this through it
 ```
 python3 -m venv .venv
 ```

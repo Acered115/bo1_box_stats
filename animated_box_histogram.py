@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from box_calc_utils import run_box_hits, default_gun_list
+from matplotlib.ticker import MaxNLocator
 
 
 def update(
@@ -29,10 +30,11 @@ def update(
     # Add labels and title
     plt.xlabel(f"Number of Successes, (bin size = 1)")
     plt.ylabel(f"Occurance")
-    ax.set_ylim(0, num_runs * 0.10)
+    ax.set_ylim(0, num_runs * 0.15)
     ax.legend([f"{frame} Simulations"], loc="upper right")
 
     ax.set_title("Live Histogram plot")
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
 
 def animated_plot_box_histogram(
@@ -58,4 +60,4 @@ def animated_plot_box_histogram(
 
 if __name__ == "__main__":
 
-    animated_plot_box_histogram(num_box_hits=2360, num_runs=100)
+    animated_plot_box_histogram(num_box_hits=250, num_runs=1000)

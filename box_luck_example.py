@@ -11,10 +11,8 @@ def create_plot(
     gun_list: list[str] = default_gun_list,
     incr_box_hits: int = 0,
 ):
-    if target_gun not in default_gun_list:
-        raise ValueError(
-            f"'{target_gun}' not found in the gun_list: {default_gun_list}"
-        )
+    if target_gun not in gun_list:
+        raise ValueError(f"'{target_gun}' not found in the gun_list: {gun_list}")
     t1 = time()
 
     target_gun_array = []
@@ -125,7 +123,10 @@ def create_plot(
 
 
 if __name__ == "__main__":
-    num_box_hits = 236
-    number_of_games = 7000
 
-    create_plot("tgun", num_box_hits, number_of_games, incr_box_hits=1)
+    create_plot(
+        target_gun="tgun",
+        num_box_hits=236,
+        num_runs=7000,
+        incr_box_hits=1,
+    )

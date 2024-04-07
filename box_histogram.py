@@ -16,7 +16,7 @@ def plot_box_histogram(
     while i < num_runs:
         count_dict = run_box_hits(
             num_box_hits=num_box_hits,
-            gun_list=default_gun_list,
+            gun_list=gun_list,
         )
         target_gun_array.append(count_dict["tgun"])
 

@@ -24,7 +24,7 @@ default_gun_list = [
 ]
 
 
-def run_box_hits(num_box_hits: int, gun_list: list[str] = default_gun_list):
+def run_box_hits(num_box_hits: int, gun_list: list[str] = default_gun_list) -> dict:
     current_hit = 0
     count_dict = {}
     for x in gun_list:

@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from box_luck_example import run_box_hits
+from box_calc_utils import run_box_hits
 import time
 from scipy.stats import binom
 from pprint import pprint
@@ -11,7 +11,7 @@ def prob_this_or_better(value, trials, prob):
     return 1 - binom.cdf(value - 1, trials, prob)
 
 
-num_runs = 150000 * 5
+num_runs = 15000
 prob = 0.05
 
 tgun_box_hits = 2367
@@ -30,9 +30,9 @@ counter = 0
 i = 0
 t0 = time.time()
 while i < num_runs:
-    tgun_count_dict = run_box_hits(tgun_box_hits)
-    gersch_count_dict = run_box_hits(gersch_box_hits)
-    dolls_count_dict = run_box_hits(dolls_box_hits)
+    tgun_count_dict = run_box_hits(num_box_hits=tgun_box_hits)
+    gersch_count_dict = run_box_hits(num_box_hits=gersch_box_hits)
+    dolls_count_dict = run_box_hits(num_box_hits=dolls_box_hits)
 
     curr_game = [
         prob_this_or_better(tgun_count_dict["tgun"], tgun_box_hits, prob),

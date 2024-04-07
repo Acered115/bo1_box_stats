@@ -6,8 +6,8 @@ import os
 def plot_binomial_dist(
     trials: int,
     prob: int,
-    marked_success: int = 0,
-    gun_name: str = "Target Gun",
+    marked_success: int,
+    gun_name: str | None = None,
     save_fig: bool = False,
 ):
     # Creating a binomial pmf calculation for every possible success between 0 and trials and storing it into a list
@@ -43,17 +43,18 @@ def plot_binomial_dist(
         if i == marked_success:
             bar.set_color("blue")
 
+    # Calculate the CDF
     cdf = sum(pmf_values[: marked_success + 1])
-    complement_of_cdf = sum(
-        pmf_values[marked_success:]
-    )  # Calculate total area of the marked region
+    # Calculate total area of the marked region
+    complement_of_cdf = sum(pmf_values[marked_success:])
 
     # Plt labelling stuff
     plt.xlabel(f"Number of Successes, (bin size = 1)")
-    plt.ylabel(f"Probability P=x")
+    plt.ylabel(f"Probability Mass Function (PMF)")
     plt.title(
-        f"Probability Distribution of {trials} trials with {prob} chance of success "
+        f"PMF Distribution of {trials} trials with {prob} chance of success,\nTag: {gun_name} "
     )
+
     plt.xticks(range(0, trials, 5))
     plt.xlim(xlow, xhigh)
     plt.grid(True)
@@ -87,9 +88,9 @@ def plot_binomial_dist(
 if __name__ == "__main__":
 
     plot_binomial_dist(
-        gun_name="tgun",
-        trials=2367,
+        gun_name="Dolls",
+        trials=1730,
         prob=0.05,
-        marked_success=143,
+        marked_success=108,
         save_fig=True,
     )

@@ -7,25 +7,29 @@ def plot_box_histogram(
     num_box_hits: int,
     num_runs: int,
     marked_success: int = None,
+    target_gun: str = "tgun",
     gun_list: list[str] = default_gun_list,
 ):
+
+    if target_gun not in gun_list:
+        raise ValueError(f"'{target_gun}' not found in the gun_list: {gun_list}")
     bin_size = 1
     target_gun_array = []
-    i = 0
+    step = 0
     t0 = time.time()
-    while i < num_runs:
+    while step < num_runs:
         count_dict = run_box_hits(
             num_box_hits=num_box_hits,
             gun_list=gun_list,
         )
-        target_gun_array.append(count_dict["tgun"])
+        target_gun_array.append(count_dict[target_gun])
 
-        i += 1
+        step += 1
 
-        if i % 500 == 0:
+        if step % 500 == 0:
             t1 = time.time()
             # print(f"Currently at {i/num_runs}%")
-            remaining = num_runs - i
+            remaining = num_runs - step
             multiple = (remaining / 500) * (t1 - t0)
 
             time.localtime(time.time() + multiple)
@@ -33,7 +37,7 @@ def plot_box_histogram(
                 "%H:%M:%S", time.localtime(time.time() + multiple)
             )
             print(
-                f"Currently at {i/num_runs*100}% completion. The script will finish in {int(multiple)} seconds, or at approximately {formatted_time}",
+                f"Currently at {step/num_runs*100}% completion. The script will finish in {int(multiple)} seconds, or at approximately {formatted_time}",
                 end="\r",
             )
 
@@ -59,7 +63,7 @@ def plot_box_histogram(
     plt.xlabel(f"Number of Successes, (bin size = 1)")
     plt.ylabel(f"Occurance")
     plt.title(
-        f"Histogram plot of {num_runs} runs of {num_box_hits} box hits with {round(1/len(count_dict),2)} chance of success ",
+        f"Histogram plot of {target_gun} with {num_runs} runs of {num_box_hits} box hits with {round(1/len(count_dict),2)} chance of success ",
         wrap=True,
     )
 
@@ -69,7 +73,8 @@ def plot_box_histogram(
 
 if __name__ == "__main__":
     plot_box_histogram(
+        target_gun="tgun",
         num_box_hits=2360,
-        num_runs=10000,
+        num_runs=1000,
         marked_success=143,
     )

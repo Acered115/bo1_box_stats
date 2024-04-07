@@ -30,7 +30,7 @@ def run_box_hits(num_box_hits: int, gun_list: list[str] = default_gun_list):
     for x in gun_list:
         count_dict[x] = 0
 
-    while current_hit < num_box_hits:
+    while current_hit <= num_box_hits:
         current_hit += 1
         randint = np.random.randint(0, len(gun_list))
         curr_gun = gun_list[randint]

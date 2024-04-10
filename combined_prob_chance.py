@@ -11,7 +11,7 @@ def prob_this_or_better(value, trials, prob):
     return 1 - binom.cdf(value - 1, trials, prob)
 
 
-num_runs = 15000
+num_runs = 150000
 prob = 0.05
 
 tgun_box_hits = 2367
@@ -31,52 +31,53 @@ i = 0
 t0 = time.time()
 
 
-# def plot_histogram(target_guns_array: list[int]):
-#     target_gun_array = []
-#     for game in target_guns_array:
-#         target_gun_array.append(np.prod(game))
-#     print(target_gun_array)
-#     bin_size = 0.002
-#     # Calculate the bin edges
-#     min_value = min(target_gun_array)
-#     max_value = max(target_gun_array)
-#     num_bins = int((max_value - min_value) / bin_size) + 1
-#     bin_edges = [min_value + i * bin_size for i in range(num_bins)]
+def run_box_hits_for_gun(guns_info: list[dict]) -> list[float]:
+    curr_combo = []
 
-#     # Create histogram
-#     plt.hist(target_gun_array, bins=bin_edges, color="skyblue", edgecolor="black")
+    for gun in guns_info:
+        gun_name = gun["gun_name"]
+        box_hits = gun["num_hits"]
+        chance_succ = gun["chance_succ"]
+        curr_game_dict = run_box_hits(num_box_hits=box_hits)
 
-#     plt.grid(True)
-#     # Add labels and title
-#     plt.xlabel(f"Number of Successes, (bin size = 1)")
-#     plt.ylabel(f"Occurance")
+        curr_combo.append(
+            prob_this_or_better(curr_game_dict[gun_name], box_hits, chance_succ)
+        )
 
-#     # Show plot
-#     plt.show()
+    return curr_combo
 
 
+guns_info = [
+    {
+        "gun_name": "tgun",
+        "num_hits": 2367,
+        "chance_succ": 0.05,
+    },
+    {
+        "gun_name": "gersch",
+        "num_hits": 687,
+        "chance_succ": 0.05,
+    },
+    {
+        "gun_name": "dolls",
+        "num_hits": 1730,
+        "chance_succ": 0.05,
+    },
+]
 while i < num_runs:
-    tgun_count_dict = run_box_hits(num_box_hits=tgun_box_hits)
-    gersch_count_dict = run_box_hits(num_box_hits=gersch_box_hits)
-    dolls_count_dict = run_box_hits(num_box_hits=dolls_box_hits)
-
-    curr_game = [
-        prob_this_or_better(tgun_count_dict["tgun"], tgun_box_hits, prob),
-        prob_this_or_better(gersch_count_dict["gersch"], gersch_box_hits, prob),
-        prob_this_or_better(dolls_count_dict["dolls"], dolls_box_hits, prob),
-    ]
-    target_guns_array.append(curr_game)
+    curr_combo = run_box_hits_for_gun(guns_info)
+    target_guns_array.append(curr_combo)
 
     if (
-        curr_game[0] <= target_tgun_prob
-        and curr_game[1] <= target_gersch_prob
-        and curr_game[2] <= target_dolls_prob
+        curr_combo[0] <= target_tgun_prob
+        and curr_combo[1] <= target_gersch_prob
+        and curr_combo[2] <= target_dolls_prob
     ):
         counter += 1
-        prod_array.append(curr_game)
+        prod_array.append(curr_combo)
         print(f"Appended 1, Counter currently at:{counter} which was {i} games in")
         print(
-            f"The chance of all 3 {np.prod(curr_game)} or 1 in {1/np.prod(curr_game)}"
+            f"The chance of all 3 {np.prod(curr_combo)} or 1 in {1/np.prod(curr_combo)}"
         )
         # print(prod_array)
 

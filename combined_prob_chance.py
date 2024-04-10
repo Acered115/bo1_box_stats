@@ -29,6 +29,32 @@ target_guns_array = []
 counter = 0
 i = 0
 t0 = time.time()
+
+
+# def plot_histogram(target_guns_array: list[int]):
+#     target_gun_array = []
+#     for game in target_guns_array:
+#         target_gun_array.append(np.prod(game))
+#     print(target_gun_array)
+#     bin_size = 0.002
+#     # Calculate the bin edges
+#     min_value = min(target_gun_array)
+#     max_value = max(target_gun_array)
+#     num_bins = int((max_value - min_value) / bin_size) + 1
+#     bin_edges = [min_value + i * bin_size for i in range(num_bins)]
+
+#     # Create histogram
+#     plt.hist(target_gun_array, bins=bin_edges, color="skyblue", edgecolor="black")
+
+#     plt.grid(True)
+#     # Add labels and title
+#     plt.xlabel(f"Number of Successes, (bin size = 1)")
+#     plt.ylabel(f"Occurance")
+
+#     # Show plot
+#     plt.show()
+
+
 while i < num_runs:
     tgun_count_dict = run_box_hits(num_box_hits=tgun_box_hits)
     gersch_count_dict = run_box_hits(num_box_hits=gersch_box_hits)
@@ -39,6 +65,7 @@ while i < num_runs:
         prob_this_or_better(gersch_count_dict["gersch"], gersch_box_hits, prob),
         prob_this_or_better(dolls_count_dict["dolls"], dolls_box_hits, prob),
     ]
+    target_guns_array.append(curr_game)
 
     if (
         curr_game[0] <= target_tgun_prob
@@ -52,8 +79,6 @@ while i < num_runs:
             f"The chance of all 3 {np.prod(curr_game)} or 1 in {1/np.prod(curr_game)}"
         )
         # print(prod_array)
-
-    target_guns_array.append(curr_game)
 
     if i % 1000 == 0:
         t1 = time.time()
@@ -74,11 +99,13 @@ while i < num_runs:
     i += 1
     print(f"{i}", end="\r")
 
-
-print(prod_array)
+# print(target_guns_array)
+# print(prod_array)
 print(f"Counter:{counter}")
 
 if counter > 0:
     print(f"This means a total chance of {counter/num_runs}")
 else:
     print(f"I didnt calculate any games better than this")
+
+# plot_histogram(target_guns_array=target_guns_array)

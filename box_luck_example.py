@@ -10,6 +10,7 @@ def create_plot(
     num_runs: int,
     gun_list: list[str] = default_gun_list,
     incr_box_hits: int = 0,
+    marked_trade_ratio: float | None = None,
 ):
     if target_gun not in gun_list:
         raise ValueError(f"'{target_gun}' not found in the gun_list: {gun_list}")
@@ -18,7 +19,7 @@ def create_plot(
     target_gun_array = []
     least_common_array = []
     most_common_array = []
-    special_gun_counter = 0
+    marked_trade_ratio_counter = 0
 
     for step in np.arange(0, num_runs):
         num_box_hits += incr_box_hits
@@ -44,15 +45,22 @@ def create_plot(
             most_common_array.append(0)
 
         if (
-            most_common[1] == count_dict[target_gun]
-            and num_box_hits / count_dict[target_gun] < 16.5524475
+            marked_trade_ratio != None
+            and num_box_hits / count_dict[target_gun] <= marked_trade_ratio
         ):
-            special_gun_counter += 1
+            marked_trade_ratio_counter += 1
             print(
-                f"Game {step}, {target_gun} was most common, {special_gun_counter} times, with a trade avg of {round(num_box_hits/count_dict[target_gun],2)} out of {num_box_hits} box hits,\nCurrent ratio: 1 in {round(step/special_gun_counter,2)}."
+                f"Game {step}, {target_gun} trade ratio < {marked_trade_ratio}, {marked_trade_ratio_counter} times, trade avg of {round(num_box_hits/count_dict[target_gun],2)} out of {num_box_hits} box hits,\nCurrent ratio: 1 in {round(step/marked_trade_ratio_counter,2)}, ({marked_trade_ratio_counter}/{step})."
             )
 
         print(f"Current Game: {step}", "\r", end="")
+
+    plt.axhline(
+        y=marked_trade_ratio,
+        color="black",
+        linestyle="--",
+        label=f"x = {marked_trade_ratio}",
+    )
 
     x_values = range(0, len(target_gun_array))
 
@@ -114,7 +122,7 @@ def create_plot(
     # Plot the line of best fit for the min values
 
     plt.xlabel("Steps")
-    plt.ylabel(f"Frequency of selected gun")
+    plt.ylabel(f"Trade Ratios")
     plt.title(f"Trade Ratio of '{target_gun}' vs. Step")
     plt.grid(True)
     plt.legend()
@@ -126,7 +134,8 @@ if __name__ == "__main__":
 
     create_plot(
         target_gun="tgun",
-        num_box_hits=236,
-        num_runs=7000,
-        incr_box_hits=1,
+        num_box_hits=2367,
+        num_runs=20000,
+        incr_box_hits=0,
+        marked_trade_ratio=16.5524476,
     )

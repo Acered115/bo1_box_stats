@@ -88,9 +88,9 @@ def plot_binomial_dist(
 if __name__ == "__main__":
 
     plot_binomial_dist(
-        gun_name="Dolls",
-        trials=1730,
+        gun_name="Tgun",
+        trials=2367,
         prob=0.05,
-        marked_success=108,
-        save_fig=True,
+        marked_success=143,
+        save_fig=False,
     )

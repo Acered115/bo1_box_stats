@@ -50,11 +50,14 @@ def create_plot(
         ):
             marked_trade_ratio_counter += 1
             print(
-                f"Game {step}, {target_gun} trade ratio < {marked_trade_ratio}, {marked_trade_ratio_counter} times, trade avg of {round(num_box_hits/count_dict[target_gun],2)} out of {num_box_hits} box hits,\nCurrent ratio: 1 in {round(step/marked_trade_ratio_counter,2)}, ({marked_trade_ratio_counter}/{step})."
+                f"Game {step}, {target_gun} trade ratio <= {marked_trade_ratio}, {marked_trade_ratio_counter} times, trade avg of {round(num_box_hits/count_dict[target_gun],2)} out of {num_box_hits} box hits,\nCurrent ratio: 1 in {round(step/marked_trade_ratio_counter,2)}, ({marked_trade_ratio_counter}/{step})."
             )
 
         print(f"Current Game: {step}", "\r", end="")
 
+    print(
+        f"Script finished, the {target_gun} had a trade ratio <= {marked_trade_ratio} {marked_trade_ratio_counter} times,\nRatio: 1 in {round(step/marked_trade_ratio_counter,2)}, ({marked_trade_ratio_counter}/{num_runs})."
+    )
     plt.axhline(
         y=marked_trade_ratio,
         color="black",
@@ -64,10 +67,6 @@ def create_plot(
 
     x_values = range(0, len(target_gun_array))
 
-    # Plot the new_array with each step
-    plt.scatter(
-        x_values, target_gun_array, color="red", label="Target Gun Trade Ratio", s=1
-    )
     # Plot max values as red dots
     plt.scatter(
         x_values,
@@ -81,6 +80,10 @@ def create_plot(
         x_values, least_common_array, color="blue", label="Highest Trade Ratio", s=1
     )
 
+    # Plot the new_array with each step
+    plt.scatter(
+        x_values, target_gun_array, color="red", label="Target Gun Trade Ratio", s=1
+    )
     if num_runs < 1000:
         poly_degree = 2
     else:
@@ -135,7 +138,7 @@ if __name__ == "__main__":
     create_plot(
         target_gun="tgun",
         num_box_hits=2367,
-        num_runs=20000,
+        num_runs=5000,
         incr_box_hits=0,
         marked_trade_ratio=16.5524476,
     )

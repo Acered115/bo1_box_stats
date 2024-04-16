@@ -50,5 +50,5 @@ pip install matplotlib
 ```
 ## Further Reading on Binomial Distribution
 Stand-up Maths / Matt Parker's video on Dream's Exposing:<br>
-https://www.youtube.com/watch?v=8Ko3TdPy0TU&t=585s
+https://www.youtube.com/watch?v=8Ko3TdPy0TU
 

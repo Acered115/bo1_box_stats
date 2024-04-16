@@ -49,6 +49,9 @@ pip install numpy
 pip install matplotlib
 ```
 ## Further Reading on Binomial Distribution
+My Video:
+https://www.youtube.com/watch?v=DO41-NiE9LE
+
 Stand-up Maths / Matt Parker's video on Dream's Exposing:<br>
 https://www.youtube.com/watch?v=8Ko3TdPy0TU
 

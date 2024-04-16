@@ -11,7 +11,7 @@ def prob_this_or_better(value, trials, prob):
     return 1 - binom.cdf(value - 1, trials, prob)
 
 
-num_runs = 150000 * 17
+num_runs = 150000
 prob = 0.05
 
 tgun_box_hits = 2367

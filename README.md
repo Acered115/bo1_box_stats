@@ -47,9 +47,10 @@ do both <br>(might look like more in the requirments.txt, but thats only because
 ```
 pip install numpy
 pip install matplotlib
+pip install scipy
 ```
 ## Further Reading on Binomial Distribution
-My Video:
+My Video:<br>
 https://www.youtube.com/watch?v=DO41-NiE9LE
 
 Stand-up Maths / Matt Parker's video on Dream's Exposing:<br>

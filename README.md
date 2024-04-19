@@ -42,7 +42,7 @@ pip install -r requirments.txt
 ```
 
 If youre using something like Anaconda or Spyder then idk, figure it out yourself :D <br>
-The only dependancies for this is numpy and matplotlib, so make sure you 
+The only dependancies for this is numpy, matplotlib and scipy, so make sure you 
 do both <br>(might look like more in the requirments.txt, but thats only because matplotlib):
 ```
 pip install numpy

@@ -60,16 +60,16 @@ This script calculates the chi-squared statistic for your inputted weapons, it a
 
 ## Further Reading 
 My Videos:<br>
-Video 1: https://www.youtube.com/watch?v=DO41-NiE9LE <br>
-Video 2: [Placeholder]
+Video 1: [Mystery Box Prob & Simulations (Part 1)](https://www.youtube.com/watch?v=DO41-NiE9LE) <br>
+Video 2: [Chi-Squared & More Simulations (Part 2)](https://www.youtube.com/watch?v=bAbxiurYeqQ)
 
 
 My gathered findings and thoughts on these simulations: <br>
-https://docs.google.com/document/d/13-u6NkEz4-t2wXBl9wIzZkgoLek8_5Zhhlwcz4tjIFU/edit#heading=h.ov9taae61k37
+https://docs.google.com/document/d/13-u6NkEz4-t2wXBl9wIzZkgoLek8_5Zhhlwcz4tjIFU
 
 My Excel Calculator <br>
-https://docs.google.com/spreadsheets/d/1uoSY4sGly_Sag6dwRtMx0XY-0Qj8NbAfkHFYHWBCOsE/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1uoSY4sGly_Sag6dwRtMx0XY-0Qj8NbAfkHFYHWBCOsE
 
 My Excel Chi-Squared Calculator
-https://docs.google.com/spreadsheets/d/1HJ23HNvsFCkMB2NS5k3ooQ8LneaAt8bLrOjzCyWpxA8/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1HJ23HNvsFCkMB2NS5k3ooQ8LneaAt8bLrOjzCyWpxA8
 

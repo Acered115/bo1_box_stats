@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from time import time
-from box_calc_utils import run_box_hits, create_list_from_dict, default_gun_list
+from utils.utils import run_box_hits, default_gun_list
 
 
 def create_plot(
@@ -111,7 +111,7 @@ def create_plot(
         p_most_comm(x_values),
         linestyle="--",
         color="green",
-        label="Best fit of Highest Trade Average",
+        label="Best fit of Lowest Trade Ratio",
     )
 
     # Plot the line of best fit for the max values
@@ -120,7 +120,7 @@ def create_plot(
         p_least_comm(x_values),
         linestyle="--",
         color="purple",
-        label="Best fit of Lowest trade Average",
+        label="Best fit of Highest Trade Ratio",
     )
     # Plot the line of best fit for the min values
 
@@ -128,6 +128,7 @@ def create_plot(
     plt.ylabel(f"Trade Ratios")
     plt.title(f"Trade Ratio of '{target_gun}' vs. Step")
     plt.grid(True)
+    plt.ylim(top=45)
     plt.legend()
     print(time() - t1)
     plt.show()
@@ -137,8 +138,8 @@ if __name__ == "__main__":
 
     create_plot(
         target_gun="tgun",
-        num_box_hits=2367,
+        num_box_hits=600,
         num_runs=5000,
         incr_box_hits=0,
-        marked_trade_ratio=16.5524476,
+        marked_trade_ratio=15.26666667,
     )

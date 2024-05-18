@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from box_calc_utils import run_box_hits, default_gun_list
+from utils.utils import run_box_hits, default_gun_list
 import time
 
 
@@ -74,7 +74,7 @@ def plot_box_histogram(
 if __name__ == "__main__":
     plot_box_histogram(
         target_gun="tgun",
-        num_box_hits=2360,
+        num_box_hits=2417,
         num_runs=1000,
-        marked_success=143,
+        marked_success=157,
     )

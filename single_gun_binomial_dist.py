@@ -62,7 +62,7 @@ def plot_binomial_dist(
     # Create legend for the dashed line and coloured bars
     legend_entries = [
         f"x = {marked_success}",
-        f"Compli area (purple):\n {complement_of_cdf:.4f}",
+        f"Equal or better (purple):\n {complement_of_cdf:.4f}",
         f"CDF area (grey):\n{cdf:.4f}",
     ]
     plt.legend(
@@ -89,8 +89,8 @@ if __name__ == "__main__":
 
     plot_binomial_dist(
         gun_name="Tgun",
-        trials=2367,
+        trials=2000,
         prob=0.05,
-        marked_success=143,
+        marked_success=115,
         save_fig=False,
     )

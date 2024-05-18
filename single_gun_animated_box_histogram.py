@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from box_calc_utils import run_box_hits, default_gun_list
+from utils.utils import run_box_hits, default_gun_list
 from matplotlib.ticker import MaxNLocator
 
 
